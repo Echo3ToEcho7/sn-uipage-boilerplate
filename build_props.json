@@ -1,0 +1,7 @@
+{
+  "instance": "https://myinstance.service-now.com",
+  "username": "username",
+  "password": "password",
+  "scope": "global",
+  "sys_id": "ui_page_sys_id"
+}

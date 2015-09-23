@@ -1,0 +1,60 @@
+<html lang="en" ng-app="StarterApp">
+  <head>
+    <script type="text/javascript">
+      window.data = ${ jvar_data };
+    </script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.css"></link>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic"></link>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+    <meta name="viewport" content="initial-scale=1" />
+  </head>
+  <body layout="column" ng-controller="AppCtrl">
+    <style>
+      .md-toolbar-tools h1 {
+        font-size: inherit;
+        font-weight: inherit;
+        margin: inherit;
+      }
+    </style>
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <md-button ng-click="toggleSidenav('left')" hide-gt-sm="hide-gt-sm" class="md-icon-button">
+          <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
+        </md-button>
+        <h1>Hello UI Page</h1>
+      </div>
+    </md-toolbar>
+    <div layout="row" flex="flex">
+        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+          <md-list>
+            <md-list-item ng-click="setType('incidents')">
+              <p>Incidents</p>
+            </md-list-item>
+            <md-list-item ng-click="setType('crs')">
+              <p>Change Requests</p>
+            </md-list-item>
+          </md-list>
+        </md-sidenav>
+        <div layout="column" flex="flex" id="content">
+            <md-content layout="column" flex="flex" class="md-padding">
+              <md-list>
+                <md-subheader class="md-no-sticky">{{ header }}</md-subheader>
+                <md-list-item class="md-2-line md-whiteframe-z2" style="background-color: white; margin-bottom: 4px" ng-repeat="item in items">
+                <img ng-src="{{item.avatar}}" class="md-avatar" alt="{{item.owner}}" />
+                <div class="md-list-item-text">
+                  <p>{{ item.desc }}</p>
+                  <h3>{{ item.owner }}</h3>
+                </div>
+                </md-list-item>
+              </md-list>
+            </md-content>
+        </div>
+    </div>
+    <!-- Angular Material Dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.js"></script>
+  </body>
+</html>
