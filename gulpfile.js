@@ -19,13 +19,19 @@ gulp.task('clientscript', () => {
     .pipe(gulp.dest('dist'));
 });
 
+gulp.task('processingscript', () => {
+  return gulp.src('src/processing_script.js')
+    .pipe(babel())
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('data', () => {
   return gulp.src('src/data.js')
     .pipe(babel())
     .pipe(builder.data());
 });
 
-gulp.task('default', ['data', 'clientscript'], () => {
+gulp.task('default', ['data', 'clientscript', 'processingscript'], () => {
   return gulp.src('src/html.html')
     .pipe(builder.html())
     .pipe(builder.build())
@@ -35,7 +41,8 @@ gulp.task('default', ['data', 'clientscript'], () => {
 gulp.task('deploy', ['default'], (done) => {
   var
     html,
-    client_script;
+    client_script,
+    processing_script;
 
   var ht = gulp.src('dist/ui_page.xml')
     .pipe(through.obj(function (file, enc, cb) {
@@ -51,11 +58,22 @@ gulp.task('deploy', ['default'], (done) => {
       cb();
     }));
 
-  return es.merge(ht, ct).pipe(through.obj(function (file, enc, cb) {
-    if (!html || !client_script) { cb(); return }
+  var pt = gulp.src('dist/processing_script.js')
+    .pipe(through.obj(function (file, enc, cb) {
+      processing_script = file.contents.toString();
+      this.push(file);
+      cb();
+    }));
 
-    record.set('html', html).set('client_script', client_script)
+  return es.merge(ht, ct, pt).pipe(through.obj(function (file, enc, cb) {
+    if (!html || !client_script || !processing_script) { cb(); return }
+
+    record.set('html', html).set('client_script', client_script).set('processing_script', processing_script)
       .update({ params: {sysparm_scope: props.scope}})
       .then(() => cb());
   }));
+});
+
+gulp.task('watch', () => {
+  gulp.watch('src/**/*.*', ['deploy', 'html', 'clientscript', 'processingscript']);
 });
