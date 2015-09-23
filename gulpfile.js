@@ -75,5 +75,5 @@ gulp.task('deploy', ['default'], (done) => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch('src/**/*.*', ['deploy', 'html', 'clientscript', 'processingscript']);
+  gulp.watch('src/**/*.*', ['deploy', 'data', 'clientscript', 'processingscript']);
 });
