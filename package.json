@@ -1,19 +1,19 @@
 {
-  "name": "nowbox",
+  "name": "sn-uipage-boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Colin O'Brien",
+  "repository": "Echo3ToEcho7/sn-uipage-boilerplate"
   "license": "ISC",
   "devDependencies": {
     "event-stream": "^3.3.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
     "gulp-util": "^3.0.6",
-    "merge-stream": "^1.0.0",
     "node-servicenow": "^1.1.0",
     "through2": "^2.0.0"
   }
