@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Colin O'Brien",
-  "repository": "Echo3ToEcho7/sn-uipage-boilerplate"
+  "repository": "Echo3ToEcho7/sn-uipage-boilerplate",
   "license": "ISC",
   "devDependencies": {
     "event-stream": "^3.3.1",
