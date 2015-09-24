@@ -2,11 +2,25 @@ var data = {};
 var incidents = new GlideRecord('incident');
 var crs = new GlideRecord('change_request');
 
+var getAvatar = function (user_sys_id) {
+  var a = new GlideRecord('sys_attachment');
+
+  a.addQuery('table_name', 'ZZ_YYsys_user');
+  a.addQuery('file_name', 'photo');
+
+  if (a.get('table_sys_id', user_sys_id)) {
+    return a.sys_id + '.iix';
+  }
+
+  return '';
+};
+
 incidents.addQuery('active', true);
 incidents.setLimit(10);
 incidents.query();
 
 data.incidents = [];
+
 while(incidents.next()) {
   var assigned_to = incidents.assigned_to.getRefRecord();
 
@@ -15,7 +29,7 @@ while(incidents.next()) {
     desc: '' + incidents.short_description,
     icon: 'computer',
     owner: '' + assigned_to.name,
-    avatar: '' + assigned_to.photo,
+    avatar: '' + getAvatar(assigned_to.sys_id.toString()),
     sys_class_name: '' + incidents.sys_class_name
   });
 }
@@ -33,7 +47,7 @@ while(crs.next()) {
     desc: '' + crs.short_description,
     icon: 'computer',
     owner: '' + assigned_to.name,
-    avatar: '' + assigned_to.photo,
+    avatar: '' + getAvatar(assigned_to.sys_id.toString()),
     sys_class_name: '' + crs.sys_class_name
   });
 }
