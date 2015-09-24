@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
 var through = require('through2');
-var merge = require('merge-stream');
 var es = require('event-stream');
 
 var ServiceNow = require('node-servicenow');
