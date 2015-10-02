@@ -5,9 +5,9 @@ var File = gutil.File;
 var build = function (data, html) {
   return `<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
-  <g:evaluate var="jvar_data" jelly="true" object="true">
+  <g:evaluate var="jvar_data" jelly="true" object="true"><[CDATA[
     ${data}
-  </g:evaluate>
+  ]]></g:evaluate>
 
   ${html}
 </j:jelly>
